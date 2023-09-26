@@ -3,6 +3,8 @@ import { SafeAreaView, StatusBar } from "react-native";
 import { Searchbar } from "react-native-paper";
 import GalleryInfoCard from "./Components/GalleryInfoCard";
 import styled from "styled-components/native";
+import { ITheme } from "../../Global/Theme";
+import { StyledProps } from "../../Global/Helpers";
 
 const name: string = "The National Gallery";
 const icon: string = "path/to/icon/image.png";
@@ -19,13 +21,17 @@ const SafeArea = styled(SafeAreaView)`
   ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `;
 
-const SearchContainer = styled.View`
-  padding: 10px;
+const SearchContainer = styled.View<StyledProps>`
+  padding: ${(props) => props.theme.space.sm};
 `;
 
-const GalleriesListContainer = styled.View`
-  padding: 10px;
+const GalleriesListContainer = styled.View<StyledProps>`
+  padding: ${(props) => props.theme.space.sm};
   flex: 1;
+`;
+
+const GalleriesSearchBar = styled(Searchbar)<StyledProps>`
+  background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
 const GalleriesScreen = () => {
@@ -35,7 +41,7 @@ const GalleriesScreen = () => {
   return (
     <SafeArea>
       <SearchContainer>
-        <Searchbar
+        <GalleriesSearchBar
           placeholder="Search"
           onChangeText={onChangeSearch}
           value={searchQuery}
